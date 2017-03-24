@@ -24,9 +24,14 @@
 	            canvas.height = img.height;
 	            ctx.drawImage(img,0,0);
         	}
-        	img.src = event.target.result;
-    	    }
-    	    reader.readAsDataURL(e.target.files[0]);     
+      img.src = event.target.result;
+      var q = img.src
+			while (q.indexOf("+") != -1)    q = q.replace('+', '%2B');
+			document.getElementById("labels").innerHTML = '<a href='
+			+ 'http://35.185.63.118/?q=' + q
+			+ '>click to send image</a>'
+    	}
+    	reader.readAsDataURL(e.target.files[0]);  
 	}
   </script>
 </html>
