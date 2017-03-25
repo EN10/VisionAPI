@@ -15,9 +15,10 @@ https://cloud.google.com/vision/docs/reference/libraries#client-libraries-instal
 
 Install
 -
-
+    curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
+    sudo apt-get install -y nodejs
+    
     sudo apt install npm
-
     npm install --save @google-cloud/vision
 
 Error: Cannot find module 
