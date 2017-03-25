@@ -4,6 +4,9 @@ Vision API
 Based On:   
 https://github.com/EN10/CanvasToPNG 
 
+Front End UI:  
+https://github.com/EN10/App-Engine-Hosting/blob/master/vision-123/www/index.html
+
 Open Image FileReader:  
 https://developer.mozilla.org/en-US/docs/Web/API/FileReader/readAsDataURL
 
@@ -21,6 +24,8 @@ Install
     sudo apt install npm
     npm install --save @google-cloud/vision
     gcloud auth application-default login
+
+    npm install express
 
 Error: Cannot find module 
 '/home/user/node_modules/grpc/src/node/extension_binary/grpc_node.node'
