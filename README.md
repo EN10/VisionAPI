@@ -20,6 +20,7 @@ Install
     
     sudo apt install npm
     npm install --save @google-cloud/vision
+    gcloud auth application-default login
 
 Error: Cannot find module 
 '/home/user/node_modules/grpc/src/node/extension_binary/grpc_node.node'
