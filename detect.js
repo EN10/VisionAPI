@@ -23,7 +23,7 @@ app.get("/", function(req, res) {
         const labels = results[0];
 
         console.log('Labels:');
-        labels.forEach((label) => output+=label+'\n');
+        labels.forEach((label) => output+=label+'<br>');
         res.send(output);
         console.log(output);
       });
