@@ -19,6 +19,7 @@ app.get("/", function(req, res) {
     exec(dl, function(error, stdout, stderr) {
       console.log(stderr);
       newimage = true;
+      detect;
       res.send(output);
     });
   }
@@ -28,6 +29,7 @@ app.get("/", function(req, res) {
     fs.writeFile('image.jpg', data, {encoding: 'base64'}, function(err){
       console.log(err);
       newimage = true;
+      detect;
       res.send(output);
     });
   }
