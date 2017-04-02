@@ -1,5 +1,6 @@
 var express = require("express");
 var app = express();
+var exec = require('child_process').exec;
 var fs = require('fs');
 
 const Vision = require('@google-cloud/vision');
@@ -10,13 +11,26 @@ const visionClient = Vision({
 });
 
 app.get("/", function(req, res) {
-    if (req.query.q != undefined){
-    var data = req.query.q.replace(/^data:image\/\w+;base64,/, '');
+    var newimage = false;
+    
+    if (req.query.url != undefined){
+    var dl = 'curl ' + req.query.url + ' > image.jpg';
+    exec(dl, function(error, stdout, stderr) {
+        console.log(stderr);
+    });
+    newimage = true;
+    }
+    
+    if (req.query.img != undefined){
+    var data = req.query.img.replace(/^data:image\/\w+;base64,/, '');
     fs.writeFile('image.jpg', data, {encoding: 'base64'}, function(err){
         console.log(err);
     });
-    console.log('Image Saved');
+    newimage = true;
+    }
     
+    if (newimage == true) {
+    console.log('Image Saved');
     var output = '';
     visionClient.detectLabels(fileName)
       .then((results) => {
@@ -28,6 +42,7 @@ app.get("/", function(req, res) {
         console.log(output);
       });
     }
+    
 });
 
 app.listen(80, function() {
