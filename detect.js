@@ -20,8 +20,9 @@ app.get("/", function(req, res) {
     exec(dl, function(error, stdout, stderr) {
       console.log(stderr);
       detect();
-      res.send(output);
+
     });
+          res.send(output);
   }
     
   if (req.query.img != undefined){
