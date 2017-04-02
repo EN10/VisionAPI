@@ -14,30 +14,23 @@ const visionClient = Vision({
   var output = '';
 
 app.get("/", function(req, res) {
-    if (req.query.url != undefined){
+  if (req.query.url != undefined){
     var dl = 'curl ' + req.query.url + ' > image.jpg';
     exec(dl, function(error, stdout, stderr) {
-        console.log(stderr);
-        newimage = true;
-        res.send(detect());
-    });
-    }
-    
-    exec.on('exit', function() {
+      console.log(stderr);
+      newimage = true;
       res.send(detect());
     });
+  }
     
-    console.log(newimage);
-    
-    if (req.query.img != undefined){
+  if (req.query.img != undefined){
     var data = req.query.img.replace(/^data:image\/\w+;base64,/, '');
     fs.writeFile('image.jpg', data, {encoding: 'base64'}, function(err){
-        console.log(err);
+      console.log(err);
+      newimage = true;
+      res.send(detect());
     });
-    newimage = true;
-    res.send(detect());
-    }
-    
+  }
 });
 
 function detect(){
