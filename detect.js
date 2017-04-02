@@ -17,8 +17,8 @@ app.get("/", function(req, res) {
     var dl = 'curl ' + req.query.url + ' > image.jpg';
     exec(dl, function(error, stdout, stderr) {
         console.log(stderr);
+        newimage = true;
     });
-    newimage = true;
     }
     
     console.log(newimage);
