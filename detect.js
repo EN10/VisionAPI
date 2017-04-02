@@ -19,7 +19,7 @@ app.get("/", function(req, res) {
     exec(dl, function(error, stdout, stderr) {
       console.log(stderr);
       newimage = true;
-      res.send(detect());
+      res.send(output);
     });
   }
     
@@ -28,7 +28,7 @@ app.get("/", function(req, res) {
     fs.writeFile('image.jpg', data, {encoding: 'base64'}, function(err){
       console.log(err);
       newimage = true;
-      res.send(detect());
+      res.send(output);
     });
   }
 });
@@ -43,7 +43,6 @@ function detect(){
       console.log('Labels:');
       labels.forEach((label) => output+=label+'<br>');
       console.log(output);
-      return output;
     });
   }
 }
