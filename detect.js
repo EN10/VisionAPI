@@ -13,7 +13,8 @@ const visionClient = Vision({
   var output = '';
 
 app.get("/", function(req, res) {
-  
+  output = '';
+
   if (req.query.url != undefined){
     var dl = 'curl ' + req.query.url + ' > image.jpg';
     exec(dl, function(error, stdout, stderr) {
