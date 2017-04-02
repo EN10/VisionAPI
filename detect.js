@@ -10,16 +10,22 @@ const visionClient = Vision({
   projectId: projectId
 });
 
+  var newimage = false;
+  var output = '';
+
 app.get("/", function(req, res) {
-    var newimage = false;
-    
     if (req.query.url != undefined){
     var dl = 'curl ' + req.query.url + ' > image.jpg';
     exec(dl, function(error, stdout, stderr) {
         console.log(stderr);
         newimage = true;
+        res.send(detect());
     });
     }
+    
+    exec.on('exit', function() {
+      res.send(detect());
+    });
     
     console.log(newimage);
     
@@ -29,23 +35,25 @@ app.get("/", function(req, res) {
         console.log(err);
     });
     newimage = true;
-    }
-    
-    if (newimage == true) {
-    console.log('Image Saved');
-    var output = '';
-    visionClient.detectLabels(fileName)
-      .then((results) => {
-        const labels = results[0];
-
-        console.log('Labels:');
-        labels.forEach((label) => output+=label+'<br>');
-        res.send(output);
-        console.log(output);
-      });
+    res.send(detect());
     }
     
 });
+
+function detect(){
+  if (newimage == true) {
+  console.log('Image Saved');
+
+  visionClient.detectLabels(fileName)
+    .then((results) => {
+      const labels = results[0];
+      console.log('Labels:');
+      labels.forEach((label) => output+=label+'<br>');
+      console.log(output);
+      return output;
+    });
+  }
+}
 
 app.listen(80, function() {
     console.log('server running');
