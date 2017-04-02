@@ -21,6 +21,8 @@ app.get("/", function(req, res) {
     newimage = true;
     }
     
+    console.log(newimage);
+    
     if (req.query.img != undefined){
     var data = req.query.img.replace(/^data:image\/\w+;base64,/, '');
     fs.writeFile('image.jpg', data, {encoding: 'base64'}, function(err){
