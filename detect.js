@@ -10,19 +10,24 @@ const visionClient = Vision({
   projectId: projectId
 });
 
-  var output = '';
-
 app.get("/", function(req, res) {
-  output = '';
-
+  var output = '';
+  
   if (req.query.url != undefined){
     var dl = 'curl ' + req.query.url + ' > image.jpg';
     exec(dl, function(error, stdout, stderr) {
       console.log(stderr);
-      detect();
 
-    });
+      visionClient.detectLabels(fileName)
+        .then((results) => {
+          const labels = results[0];
+          console.log('Labels:');
+          labels.forEach((label) => output+=label+'<br>');
+          console.log(output);
           res.send(output);
+        });
+        
+    });
   }
     
   if (req.query.img != undefined){
@@ -42,16 +47,6 @@ app.get("/", function(req, res) {
     });
   }
 });
-
-function detect(){
-  visionClient.detectLabels(fileName)
-    .then((results) => {
-      const labels = results[0];
-      console.log('Labels:');
-      labels.forEach((label) => output+=label+'<br>');
-      console.log(output);
-    });
-}
 
 app.listen(80, function() {
     console.log('server running');
