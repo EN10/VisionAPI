@@ -31,3 +31,9 @@ Error: Cannot find module
 '/home/user/node_modules/grpc/src/node/extension_binary/grpc_node.node'
 
     npm install grpc
+    
+Run
+-
+Start VM instance and copy External IP.  
+
+    screen sudo node ~/VisionAPI/detect.js

@@ -2,7 +2,7 @@
 <html>
 <body>
 
-<div id="demo">
+<div id="ip">
 <h1>The XMLHttpRequest Object</h1>
 <button type="button" onclick="ajax()">Change Content</button>
 </div>
@@ -12,11 +12,11 @@
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
-      document.getElementById("labels").innerHTML =
+      document.getElementById("ip").innerHTML =
       this.responseText;
     }
   };
-  xhttp.open("GET", "104.196.20.215/?q="+src, true);
+  xhttp.open("GET", "https://vision-ip.appspot.com/show", true);
   xhttp.send();
 }
 </script>
